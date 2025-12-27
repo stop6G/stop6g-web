@@ -3,156 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STOP6G.eu | STOP 6G International Collective</title>
+    <title>STOP6G.eu | International Collective</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            /* MODO LIGHT: Blanco y Gris Oscuro */
-            --bg-color: #ffffff; 
-            --text-color: #1a1a1a;
-            --sub-text: #333333;
-            --point-text: #444444;
-            --border-color: #1a1a1a;
-            --footer-text: #999999;
-            --footer-border: #eeeeee;
-        }
+ <style>
+    /* VARIABLES DE COLOR Y TRANSICIÓN */
+    :root {
+        --bg-color: #ffffff; 
+        --text-color: #1a1a1a;
+        --sub-text: #333333;
+        --point-text: #444444;
+        --border-color: #1a1a1a;
+        --footer-text: #999999;
+        --footer-border: #eeeeee;
+    }
 
-        [data-theme="dark"] {
-            /* MODO DARK: Gris profundo y Blanco */
-            --bg-color: #0a0a0a;
-            --text-color: #ffffff;
-            --sub-text: #cccccc;
-            --point-text: #bbbbbb;
-            --border-color: #ffffff;
-            --footer-text: #666666;
-            --footer-border: #222222;
-        }
+    [data-theme="dark"] {
+        --bg-color: #0a0a0a;
+        --text-color: #ffffff;
+        --sub-text: #cccccc;
+        --point-text: #bbbbbb;
+        --border-color: #ffffff;
+        --footer-text: #666666;
+        --footer-border: #222222;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: -apple-system, system-ui, sans-serif;
-            margin: 0;
-            padding: 80px 20px 0 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    /* ESTILOS BASE */
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 80px 20px 0 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-        #theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            z-index: 1000;
-        }
+    /* BOTÓN MODO OSCURO */
+    #theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        z-index: 1000;
+        transition: all 0.2s ease;
+    }
 
-        .container {
-            max-width: 650px;
-            width: 100%;
-            text-align: center;
-            flex-grow: 1;
-        }
+    #theme-toggle:hover {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+    }
 
-        h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            margin: 0 0 20px 0;
-            letter-spacing: -4px;
-            line-height: 0.9;
-        }
+    /* CONTENEDOR PRINCIPAL */
+    .container {
+        max-width: 650px;
+        width: 100%;
+        text-align: center;
+        flex-grow: 1;
+    }
 
-        .description {
-            font-size: 1.3rem;
-            line-height: 1.5;
-            margin-bottom: 40px;
-            color: var(--sub-text);
-        }
+    /* CABECERA */
+    h1 {
+        font-size: 5rem;
+        font-weight: 900;
+        margin: 0 0 20px 0;
+        letter-spacing: -4px;
+        line-height: 0.9;
+    }
 
-        .battle {
-            display: block;
-            margin-top: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1rem;
-        }
+    .description {
+        font-size: 1.3rem;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        color: var(--sub-text);
+        text-align: center;
+    }
 
-        .social {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 80px;
-        }
+    .battle {
+        display: block;
+        margin-top: 25px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1rem;
+    }
 
-        .social a {
-            color: var(--text-color);
-            font-size: 2rem;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
+    /* REDES SOCIALES */
+    .social {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 80px;
+    }
 
-        .social a:hover { opacity: 0.4; }
+    .social a {
+        color: var(--text-color);
+        font-size: 2.2rem;
+        text-decoration: none;
+        transition: opacity 0.2s, transform 0.2s;
+    }
 
-        .manifesto {
-            text-align: left;
-            border-top: 3px solid var(--border-color);
-            padding-top: 50px;
-            margin-bottom: 100px;
-        }
+    .social a:hover {
+        opacity: 0.4;
+        transform: translateY(-3px);
+    }
 
-        .manifesto h2 {
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-size: 0.8rem;
-            margin-bottom: 50px;
-        }
+    /* MANIFIESTO */
+    .manifesto {
+        text-align: left;
+        border-top: 3px solid var(--border-color);
+        padding-top: 50px;
+        margin-bottom: 80px;
+    }
 
-        .point { margin-bottom: 45px; }
+    .manifesto h2 {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-size: 0.8rem;
+        margin-bottom: 50px;
+    }
 
-        .point span {
-            display: block;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--border-color);
-            padding-left: 15px;
-        }
+    .point {
+        margin-bottom: 45px;
+    }
 
-        .point p {
-            margin: 0;
-            font-size: 1.1rem;
-            color: var(--point-text);
-            padding-left: 19px;
-        }
+    .point span {
+        display: block;
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        border-left: 4px solid var(--border-color);
+        padding-left: 15px;
+    }
 
-        footer {
-            width: 100%;
-            max-width: 650px;
-            border-top: 1px solid var(--footer-border);
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--footer-text);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+    .point p {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--point-text);
+        padding-left: 19px;
+        line-height: 1.5;
+    }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 3.5rem; }
-            .description { font-size: 1.1rem; }
-        }
+    /* CONTADOR (COUNTDOWN) */
+    .countdown-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 100px;
+        padding-top: 50px;
+        border-top: 1px solid var(--footer-border);
+    }
+
+    .countdown-section h2 {
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-size: 0.8rem;
+        margin-bottom: 40px;
+        color: var(--text-color);
+    }
+
+    #countdown {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .time-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .time-unit span {
+        font-size: 3.5rem;
+        font-weight: 900;
+        letter-spacing: -3px;
+    }
+
+    .time-unit label {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--footer-text);
+        margin-top: 5px;
+    }
+
+    /* FRASE FINAL */
+    .enjoy-fight {
+        margin-top: 50px;
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 1.3rem;
+        letter-spacing: 6px;
+        text-align: center;
+        width: 100%;
+        color: var(--text-color);
+    }
+
+    /* FOOTER */
+    footer {
+        width: 100%;
+        max-width: 650px;
+        border-top: 1px solid var(--footer-border);
+        padding: 40px 0;
+        text-align: center;
+        font-size: 0.7rem;
+        color: var(--footer-text);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+        h1 { font-size: 3.5rem; letter-spacing: -2px; }
+        .description { font-size: 1.1rem; }
+        #countdown { gap: 15px; }
+        .time-unit span { font-size: 2rem; }
+        .enjoy-fight { font-size: 1rem; letter-spacing: 3px; }
+    }
+</style>
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -230,6 +317,29 @@
         </section>
     </div>
 
+<section class="countdown-section">
+    <h2>Estimated 6G Global Deployment</h2>
+    <div id="countdown">
+        <div class="time-unit">
+            <span id="days">00</span>
+            <label>Days</label>
+        </div>
+        <div class="time-unit">
+            <span id="hours">00</span>
+            <label>Hours</label>
+        </div>
+        <div class="time-unit">
+            <span id="minutes">00</span>
+            <label>Minutes</label>
+        </div>
+        <div class="time-unit">
+            <span id="seconds">00</span>
+            <label>Seconds</label>
+        </div>
+    </div>
+    <p class="enjoy-fight">ENJOY THE FIGHT</p>
+</section>
+
     <footer>
         &copy; 2025 STOP6G.EU &bull; Brussels &bull; International Collective
     </footer>
@@ -256,5 +366,25 @@
             }
         });
     </script>
+<script>
+    function updateCountdown() {
+        const launchDate = new Date("January 1, 2030 00:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = launchDate - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days.toString().padStart(2, '0');
+        document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
 </body>
 </html>
