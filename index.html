@@ -116,6 +116,54 @@
             transform: translateY(-3px);
         }
 
+.social-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.contact-icon a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: opacity 0.2s;
+    margin-top: 10px;
+}
+
+.contact-icon i {
+    font-size: 1.8rem; /* Tamaño coherente con los otros iconos */
+}
+
+.contact-icon span {
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sub-text);
+}
+
+.contact-icon a:hover {
+    opacity: 0.4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
         .manifesto {
             text-align: left;
             border-top: 3px solid var(--border-color);
@@ -244,14 +292,23 @@
             <span class="battle">The battle started today</span>
         </div>
 
-        <div class="social">
-            <a href="https://github.com/stop6G" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://mastodon.social/@stop6G" target="_blank" title="Mastodon"><i class="fab fa-mastodon"></i></a>
-            <a href="https://www.reddit.com/r/Stop6G/" target="_blank" title="Reddit"><i class="fab fa-reddit-alien"></i></a>
-            <a href=" https://bsky.app/profile/stop6g.bsky.social" target="_blank" title="Bluesky"><i class="fa-brands fa-bluesky"></i></a>
-            <a href="https://instagram.com/stop6g" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://discord.gg/YmvKx5ZnsY" target="_blank"><i class="fab fa-discord"></i></a>
-        </div>
+     <div class="social-wrapper">
+    <div class="social">
+        <a href="https://github.com/stop6G" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://mastodon.social/@stop6G" target="_blank" title="Mastodon"><i class="fab fa-mastodon"></i></a>
+        <a href="https://www.reddit.com/r/Stop6G/" target="_blank" title="Reddit"><i class="fab fa-reddit-alien"></i></a>
+        <a href="https://bsky.app/profile/stop6g.bsky.social" target="_blank" title="Bluesky"><i class="fa-brands fa-bluesky"></i></a>
+        <a href="https://instagram.com/stop6g" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://discord.gg/YmvKx5ZnsY" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+    </div>
+    
+    <div class="contact-icon">
+        <a href="mailto:STOP6G@proton.me" title="Encrypted Email">
+            <i class="fas fa-envelope"></i>
+            <span>STOP6G@PROTON.ME</span>
+        </a>
+    </div>
+</div>
 
         <section class="manifesto">
             <h2>Manifesto</h2>
