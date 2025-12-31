@@ -96,12 +96,11 @@
             font-size: 1rem;
         }
 
-     .social {
+.social {
     display: flex;
     justify-content: center;
-    gap: 25px; /* Bajamos a 25px para acomodar los 6 iconos */
-    margin-bottom: 80px;
-    flex-wrap: wrap; /* Importante para que en móvil se dividan en dos filas si es necesario */
+    gap: 25px;
+    flex-wrap: wrap;
 }
 
 .social a {
@@ -121,35 +120,28 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 80px;
+    gap: 15px; /* Controla la cercanía entre la fila y el sobre */
 }
 
-.contact-icon a {
+.social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.contact-icon-only a {
     color: var(--text-color);
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    transition: opacity 0.2s;
-    margin-top: 10px;
+    font-size: 1.8rem; /* Mismo tamaño que los otros iconos */
+    transition: opacity 0.2s, transform 0.2s;
+    display: block;
 }
 
-.contact-icon i {
-    font-size: 1.8rem; /* Tamaño coherente con los otros iconos */
-}
-
-.contact-icon span {
-    font-size: 0.7rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--sub-text);
-}
-
-.contact-icon a:hover {
+.contact-icon-only a:hover {
     opacity: 0.4;
+    transform: translateY(-3px);
 }
-
 
 
 
@@ -292,20 +284,19 @@
             <span class="battle">The battle started today</span>
         </div>
 
-     <div class="social-wrapper">
+<div class="social-wrapper">
     <div class="social">
         <a href="https://github.com/stop6G" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
         <a href="https://mastodon.social/@stop6G" target="_blank" title="Mastodon"><i class="fab fa-mastodon"></i></a>
         <a href="https://www.reddit.com/r/Stop6G/" target="_blank" title="Reddit"><i class="fab fa-reddit-alien"></i></a>
         <a href="https://bsky.app/profile/stop6g.bsky.social" target="_blank" title="Bluesky"><i class="fa-brands fa-bluesky"></i></a>
-        <a href="https://instagram.com/stop6g" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://discord.gg/YmvKx5ZnsY" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        <a href="https://instagram.com/stop6g" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://discord.gg/YmvKx5ZnsY" target="_blank"><i class="fab fa-discord"></i></a>
     </div>
     
-    <div class="contact-icon">
-        <a href="mailto:STOP6G@proton.me" title="Encrypted Email">
+    <div class="contact-icon-only">
+        <a href="mailto:STOP6G@proton.me" title="STOP6G@proton.me">
             <i class="fas fa-envelope"></i>
-            <span>STOP6G@PROTON.ME</span>
         </a>
     </div>
 </div>
