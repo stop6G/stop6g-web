@@ -96,19 +96,20 @@
             font-size: 1rem;
         }
 
-        .social {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 80px;
-        }
+     .social {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Bajamos a 25px para acomodar los 6 iconos */
+    margin-bottom: 80px;
+    flex-wrap: wrap; /* Importante para que en móvil se dividan en dos filas si es necesario */
+}
 
-        .social a {
-            color: var(--text-color);
-            font-size: 2.2rem;
-            text-decoration: none;
-            transition: opacity 0.2s, transform 0.2s;
-        }
+.social a {
+    color: var(--text-color);
+    font-size: 1.8rem; /* Bajamos ligeramente el tamaño para un look más refinado */
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+}
 
         .social a:hover {
             opacity: 0.4;
