@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STOP6G.eu | International Collective</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><circle cx=%2250%22 cy=%2250%22 r=%2220%22 fill=%22white%22/></svg>">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">  
     <style>
         /* VARIABLES DE COLOR Y TRANSICIÓN */
         :root {
@@ -42,26 +42,25 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* BOTÓN MODO OSCURO */
+        /* BOTÓN MODO OSCURO (ICONO) */
         #theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 25px;
+            right: 25px;
             background: none;
-            border: 1px solid var(--border-color);
+            border: none;
             color: var(--text-color);
-            padding: 8px 12px;
+            padding: 5px;
             cursor: pointer;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 1.4rem; /* Tamaño del icono */
             z-index: 1000;
-            transition: all 0.2s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0.7;
         }
 
         #theme-toggle:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
+            opacity: 1;
+            transform: rotate(15deg) scale(1.1);
         }
 
         .container {
@@ -96,66 +95,74 @@
             font-size: 1rem;
         }
 
-.social {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
+        /* ESTRUCTURA SOCIAL Y CONTACTO */
+        .social-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 15px; 
+        }
 
-.social a {
-    color: var(--text-color);
-    font-size: 1.8rem; /* Bajamos ligeramente el tamaño para un look más refinado */
-    text-decoration: none;
-    transition: opacity 0.2s, transform 0.2s;
-}
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .social a {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
 
         .social a:hover {
             opacity: 0.4;
             transform: translateY(-3px);
         }
 
-.social-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 80px;
-    gap: 15px; /* Controla la cercanía entre la fila y el sobre */
-}
+        .contact-icon-only a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.8rem;
+            transition: opacity 0.2s, transform 0.2s;
+            display: block;
+        }
 
-.social {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
+        .contact-icon-only a:hover {
+            opacity: 0.4;
+            transform: translateY(-3px);
+        }
 
-.contact-icon-only a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.8rem; /* Mismo tamaño que los otros iconos */
-    transition: opacity 0.2s, transform 0.2s;
-    display: block;
-}
+        /* MENÚ DE NAVEGACIÓN */
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
 
-.contact-icon-only a:hover {
-    opacity: 0.4;
-    transform: translateY(-3px);
-}
+        .main-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: opacity 0.2s;
+        }
 
+        .main-menu a:hover {
+            opacity: 0.6;
+            text-decoration: underline;
+            text-underline-offset: 5px;
+        }
 
-
-
-
-
-
-
-
-
-
-
-        
-
+        /* MANIFIESTO */
         .manifesto {
             text-align: left;
             border-top: 3px solid var(--border-color);
@@ -193,6 +200,7 @@
             line-height: 1.5;
         }
 
+        /* CONTADOR */
         .countdown-section {
             display: flex;
             flex-direction: column;
@@ -249,6 +257,7 @@
             color: var(--text-color);
         }
 
+        /* FOOTER */
         footer {
             width: 100%;
             max-width: 650px;
@@ -267,12 +276,16 @@
             #countdown { gap: 15px; }
             .time-unit span { font-size: 2rem; }
             .enjoy-fight { font-size: 1rem; letter-spacing: 3px; }
+            .main-menu { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <button id="theme-toggle">Dark Mode</button>
+    <!-- BOTÓN DARK MODE (SOLO ICONO) -->
+    <button id="theme-toggle" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <div class="container">
         <h1>STOP 6G</h1>
@@ -281,25 +294,32 @@
             Brussels-based international collective<br>
             advocating for <strong>human sovereignty</strong> against<br>
             <strong>embodied AI</strong>, <strong>total control</strong> and <strong>pervasive surveillance</strong>.
-            <span class="battle">The battle started today</span>
+            <span class="battle">The battle started today.</span>
         </div>
 
-<div class="social-wrapper">
-    <div class="social">
-        <a href="https://github.com/stop6G" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://mastodon.social/@stop6G" target="_blank" title="Mastodon"><i class="fab fa-mastodon"></i></a>
-        <a href="https://www.reddit.com/r/Stop6G/" target="_blank" title="Reddit"><i class="fab fa-reddit-alien"></i></a>
-        <a href="https://bsky.app/profile/stop6g.bsky.social" target="_blank" title="Bluesky"><i class="fa-brands fa-bluesky"></i></a>
-        <a href="https://instagram.com/stop6g" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://discord.gg/YmvKx5ZnsY" target="_blank"><i class="fab fa-discord"></i></a>
-    </div>
-    
-    <div class="contact-icon-only">
-        <a href="mailto:STOP6G@proton.me" title="STOP6G@proton.me">
-            <i class="fas fa-envelope"></i>
-        </a>
-    </div>
-</div>
+        <div class="social-wrapper">
+            <div class="social">
+                <a href="https://github.com/stop6G" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://mastodon.social/@stop6G" target="_blank" title="Mastodon"><i class="fab fa-mastodon"></i></a>
+                <a href="https://www.reddit.com/r/Stop6G/" target="_blank" title="Reddit"><i class="fab fa-reddit-alien"></i></a>
+                <a href="https://bsky.app/profile/stop6g.bsky.social" target="_blank" title="Bluesky"><i class="fa-brands fa-bluesky"></i></a>
+                <a href="https://instagram.com/stop6g" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://discord.gg/YmvKx5ZnsY" target="_blank"><i class="fab fa-discord"></i></a>
+            </div>
+            
+            <div class="contact-icon-only">
+                <a href="mailto:STOP6G@proton.me" title="STOP6G@proton.me">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- NAVIGATION MENU -->
+        <nav class="main-menu">
+            <a href="index.html">Manifesto</a>
+            <a href="https://stop6g.github.io/6G-SCOUT" target="_blank">6G European Ecosystem</a>
+            <a href="https://stop6g.bigcartel.com/products" target="_blank">Support</a>
+        </nav>
 
         <section class="manifesto">
             <h2>Manifesto</h2>
@@ -386,11 +406,23 @@
     <script>
         // Theme Toggle Script
         const btn = document.getElementById("theme-toggle");
+        const icon = btn.querySelector("i");
         const currentTheme = localStorage.getItem("theme");
+
+        // Función para actualizar el icono
+        function updateIcon(theme) {
+            if (theme === "dark") {
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+            } else {
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+            }
+        }
 
         if (currentTheme === "dark") {
             document.documentElement.setAttribute("data-theme", "dark");
-            btn.textContent = "Light Mode";
+            updateIcon("dark");
         }
 
         btn.addEventListener("click", () => {
@@ -398,11 +430,11 @@
             if (theme === "dark") {
                 document.documentElement.removeAttribute("data-theme");
                 localStorage.setItem("theme", "light");
-                btn.textContent = "Dark Mode";
+                updateIcon("light");
             } else {
                 document.documentElement.setAttribute("data-theme", "dark");
                 localStorage.setItem("theme", "dark");
-                btn.textContent = "Light Mode";
+                updateIcon("dark");
             }
         });
 
