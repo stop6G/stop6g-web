@@ -3,11 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STOP6G.eu | International Collective</title>
+    <title>STOP6G.eu | Brussels-based international collective advocating for human sovereignty against embodied AI, total control and pervasive surveillance. The battle started today</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><circle cx=%2250%22 cy=%2250%22 r=%2220%22 fill=%22white%22/></svg>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">  
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Fonts for Text Engine (Critical for Clown Mode) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=VT323&display=swap" rel="stylesheet">
+
+    <!-- Libraries for Text Engine -->
+    <script src="https://unpkg.com/compromise"></script>
+    
+    <!-- TAILWIND CONFIG MUST BE BEFORE LOADING TAILWIND -->
+    <script>
+        window.tailwind = {
+            config: {
+                corePlugins: {
+                    preflight: false, // Critical: Don't reset site styles
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        /* VARIABLES DE COLOR Y TRANSICIÓN */
+        /* --- MAIN SITE STYLES --- */
         :root {
             --bg-color: #ffffff; 
             --text-color: #1a1a1a;
@@ -28,7 +51,6 @@
             --footer-border: #222222;
         }
 
-        /* ESTILOS BASE */
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -42,7 +64,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* BOTÓN MODO OSCURO (ICONO) */
+        /* --- UI ELEMENTS --- */
         #theme-toggle {
             position: fixed;
             top: 25px;
@@ -61,233 +83,159 @@
             align-items: center;
             justify-content: center;
         }
+        #theme-toggle:hover { opacity: 1; transform: rotate(15deg) scale(1.1); }
 
-        #theme-toggle:hover {
-            opacity: 1;
-            transform: rotate(15deg) scale(1.1);
-        }
-
-        .container {
+        .content-wrapper {
             max-width: 650px;
             width: 100%;
             text-align: center;
             flex-grow: 1;
-        }
-
-        h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            margin: 0 0 20px 0;
-            letter-spacing: -4px;
-            line-height: 0.9;
-        }
-
-        .description {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            color: var(--sub-text);
-            text-align: center;
-        }
-
-        .battle {
-            display: block;
-            margin-top: 25px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1rem;
-        }
-
-        /* ESTRUCTURA SOCIAL Y CONTACTO */
-        .social-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin-bottom: 40px;
-            gap: 15px; 
         }
 
-        .social {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .social a {
+        /* LOGO FIX */
+        .main-logo {
+            font-size: 5rem !important;
+            font-weight: 900 !important;
+            margin: 0 0 20px 0 !important;
+            letter-spacing: -4px !important;
+            line-height: 0.9 !important;
             color: var(--text-color);
-            font-size: 1.8rem;
-            text-decoration: none;
-            transition: opacity 0.2s, transform 0.2s;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Ajuste específico para SVGs personalizados (Pixelfed, Lemmy) */
-        .custom-icon {
-            width: 1em;
-            height: 1em;
-            fill: currentColor;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .social a:hover {
-            opacity: 0.4;
-            transform: translateY(-3px);
-        }
-
-        .contact-icon-only a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1.8rem;
-            transition: opacity 0.2s, transform 0.2s;
+            text-align: center;
             display: block;
         }
 
-        .contact-icon-only a:hover {
-            opacity: 0.4;
-            transform: translateY(-3px);
-        }
+        .description { font-size: 1.3rem; line-height: 1.6; margin-bottom: 40px; color: var(--sub-text); text-align: center; }
+        .battle { display: block; margin-top: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; }
 
-        /* MENÚ DE NAVEGACIÓN */
-        .main-menu {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 60px;
-        }
+        .social-wrapper { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; gap: 15px; }
+        .social { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; align-items: center; }
+        .social a, .contact-icon-only a { color: var(--text-color); font-size: 1.8rem; text-decoration: none; transition: opacity 0.2s, transform 0.2s; display: flex; align-items: center; }
+        .custom-icon { width: 1em; height: 1em; fill: currentColor; display: inline-block; vertical-align: middle; }
+        .social a:hover, .contact-icon-only a:hover { opacity: 0.4; transform: translateY(-3px); }
 
-        .main-menu a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            transition: opacity 0.2s;
-        }
+        .main-menu { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-bottom: 60px; }
+        .main-menu a { color: var(--text-color); text-decoration: none; font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; position: relative; transition: opacity 0.2s; cursor: pointer; }
+        .main-menu a:hover, .main-menu a.active { opacity: 0.6; text-decoration: underline; text-underline-offset: 5px; }
 
-        .main-menu a:hover {
-            opacity: 0.6;
-            text-decoration: underline;
-            text-underline-offset: 5px;
+        /* --- MANIFESTO --- */
+        .manifesto { 
+            text-align: left; 
+            border-top: 3px solid var(--border-color); 
+            padding-top: 50px; 
+            margin-bottom: 80px; 
         }
+        .manifesto h2 { text-align: center; text-transform: uppercase; letter-spacing: 5px; font-size: 0.8rem; margin-bottom: 50px; color: var(--text-color); }
+        .point { margin-bottom: 45px; }
+        .point span { display: block; font-weight: 900; text-transform: uppercase; font-size: 0.95rem; margin-bottom: 10px; border-left: 4px solid var(--border-color); padding-left: 15px; }
+        .point p { margin: 0; font-size: 1.1rem; color: var(--point-text); padding-left: 19px; line-height: 1.5; }
 
-        /* MANIFIESTO */
-        .manifesto {
-            text-align: left;
-            border-top: 3px solid var(--border-color);
-            padding-top: 50px;
-            margin-bottom: 80px;
+        /* --- COUNTDOWN --- */
+        .countdown-section { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            margin-bottom: 100px; 
+            padding-top: 50px; 
+            border-top: 1px solid var(--footer-border); 
+            width: 100%; 
         }
+        .countdown-section h2 { text-transform: uppercase; letter-spacing: 5px; font-size: 0.8rem; margin-bottom: 40px; color: var(--text-color); }
+        #countdown { display: flex; justify-content: center; gap: 30px; }
+        .time-unit { display: flex; flex-direction: column; align-items: center; }
+        .time-unit span { font-size: 3.5rem; font-weight: 900; letter-spacing: -3px; }
+        .time-unit label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--footer-text); margin-top: 5px; }
+        .enjoy-fight { margin-top: 50px; font-weight: 900; text-transform: uppercase; font-size: 1.3rem; letter-spacing: 6px; text-align: center; width: 100%; color: var(--text-color); }
 
-        .manifesto h2 {
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-size: 0.8rem;
+        footer { width: 100%; max-width: 650px; border-top: 1px solid var(--footer-border); padding: 40px 0; text-align: center; font-size: 0.7rem; color: var(--footer-text); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- TEXT ENGINE STYLES (.TXT Mode) --- */
+        #txt-view {
+            display: none;
+            flex-grow: 1;
             margin-bottom: 50px;
+            border-top: 3px solid var(--border-color);
+            padding-top: 40px;
+            text-align: left;
         }
 
-        .point {
-            margin-bottom: 45px;
-        }
+        /* Reader Typography */
+        #txt-view .prose p { margin-bottom: 1.5em; line-height: 1.75; font-size: 1.1rem; }
+        #txt-view .prose h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1em; letter-spacing: -1px; color: var(--text-color); margin-top: 0; }
+        #txt-view .prose h2 { font-size: 1.5rem; font-weight: 600; margin-top: 2em; margin-bottom: 1em; color: var(--text-color); opacity: 0.9; }
+        #txt-view .prose h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1.5em; margin-bottom: 0.75em; color: var(--text-color); opacity: 0.8; }
+        #txt-view .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1.5em; }
+        #txt-view .prose blockquote { border-left: 2px solid var(--border-color); padding-left: 1rem; margin-left: 0; color: var(--point-text); font-style: italic; }
+        #txt-view b, #txt-view strong { font-weight: 800; color: var(--text-color); } 
+        
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .point span {
-            display: block;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--border-color);
-            padding-left: 15px;
-        }
+        /* Reader: Footnotes */
+        sup button { text-decoration: none; margin-left: 2px; opacity: 0.8; transition: opacity 0.2s; border: none; background: none; cursor: pointer; color: #ec4899; }
+        sup button:hover { opacity: 1; text-decoration: underline; }
 
-        .point p {
-            margin: 0;
-            font-size: 1.1rem;
-            color: var(--point-text);
-            padding-left: 19px;
-            line-height: 1.5;
-        }
+        /* Reader: CLOWN MODE COLORS (Forced Override) */
+        .text-red-400 { color: #f87171 !important; }
+        .text-orange-400 { color: #fb923c !important; }
+        .text-yellow-300 { color: #fde047 !important; }
+        .text-lime-400 { color: #a3e635 !important; }
+        .text-emerald-400 { color: #34d399 !important; }
+        .text-cyan-400 { color: #22d3ee !important; }
+        .text-blue-400 { color: #60a5fa !important; }
+        .text-violet-400 { color: #a78bfa !important; }
+        .text-fuchsia-400 { color: #e879f9 !important; }
+        .text-rose-400 { color: #fb7185 !important; }
+        
+        .font-metal { font-family: 'Metal Mania', cursive !important; }
 
-        /* CONTADOR */
-        .countdown-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 100px;
-            padding-top: 50px;
-            border-top: 1px solid var(--footer-border);
-            width: 100%;
-            max-width: 650px;
+        /* Reader: Clown Mode Animations */
+        @keyframes blink { 
+            0%, 100% { opacity: 1; text-shadow: 0 0 5px rgba(255,255,255,0.8); } 
+            50% { opacity: 0.3; text-shadow: none; } 
         }
+        .blink-1g { animation: blink 3s linear infinite; color: var(--text-color); font-weight: 800; }
+        .blink-2g { animation: blink 2.5s linear infinite; color: var(--text-color); font-weight: 800; }
+        .blink-3g { animation: blink 2s linear infinite; color: var(--text-color); font-weight: 800; }
+        .blink-4g { animation: blink 1.5s linear infinite; color: var(--text-color); font-weight: 800; }
+        .blink-5g { animation: blink 1s linear infinite; color: var(--text-color); font-weight: 800; }
+        .blink-6g { animation: blink 0.2s linear infinite; color: #ef4444 !important; font-size: 1.2em; } 
 
-        .countdown-section h2 {
-            text-transform: uppercase;
-            letter-spacing: 5px;
+        /* Reader: Heatmap Mode */
+        .heat-1 { opacity: 0.3; } 
+        .heat-2 { opacity: 0.5; } 
+        .heat-3 { opacity: 0.7; } 
+        .heat-4 { opacity: 0.9; } 
+        .heat-5 { opacity: 1; font-weight: bold; color: #ef4444 !important; }
+
+        /* Reader: Chaos Mode */
+        .chaos-word { display: inline-block; transition: transform 0.1s; }
+
+        /* Reader: UI Controls (UPDATED) */
+        .view-btn { 
+            background-color: transparent; 
+            color: var(--text-color);
             font-size: 0.8rem;
-            margin-bottom: 40px;
-            color: var(--text-color);
+            font-family: monospace;
+            font-weight: bold;
+            padding: 2px 5px;
+            border: 1px solid transparent; 
+            cursor: pointer;
+            transition: all 0.2s;
+            opacity: 0.4;
+            line-height: 1;
+            margin-left: 0; /* Closer together */
         }
-
-        #countdown {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .time-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .time-unit span {
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: -3px;
-        }
-
-        .time-unit label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--footer-text);
-            margin-top: 5px;
-        }
-
-        .enjoy-fight {
-            margin-top: 50px;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 1.3rem;
-            letter-spacing: 6px;
-            text-align: center;
-            width: 100%;
-            color: var(--text-color);
-        }
-
-        /* FOOTER */
-        footer {
-            width: 100%;
-            max-width: 650px;
-            border-top: 1px solid var(--footer-border);
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--footer-text);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .view-btn:hover { opacity: 1; }
+        .view-btn.active { 
+            opacity: 1; 
+            text-decoration: none; /* Removed underline */
+            border: 1px solid var(--border-color); /* Subtle box border for active */
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 3.5rem; letter-spacing: -2px; }
+            .main-logo { font-size: 3.5rem !important; letter-spacing: -2px !important; }
             .description { font-size: 1.1rem; }
             #countdown { gap: 15px; }
             .time-unit span { font-size: 2rem; }
@@ -303,8 +251,9 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <div class="container">
-        <h1>STOP 6G</h1>
+    <!-- CONTENT WRAPPER -->
+    <div class="content-wrapper">
+        <h1 class="main-logo">STOP 6G</h1>
         
         <div class="description">
             Brussels-based international collective<br>
@@ -317,7 +266,7 @@
             <div class="social">
                 <a href="https://github.com/stop6G" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://mastodon.social/@stop6G" target="_blank" title="Mastodon"><i class="fab fa-mastodon"></i></a>
-                <!-- LEMMY CON SVG DIRECTO (Reemplaza a Reddit) -->
+                <!-- LEMMY CON SVG DIRECTO -->
                 <a href="https://lemmy.world/c/STOP6G" target="_blank" title="Lemmy">
                     <svg class="custom-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256,0C114.6,0,0,114.6,0,256s114.6,256,256,256s256-114.6,256-256S397.4,0,256,0z M135.3,169.6 c0-11.7,9.5-21.2,21.2-21.2c11.7,0,21.2,9.5,21.2,21.2s-9.5,21.2-21.2,21.2C144.8,190.8,135.3,181.3,135.3,169.6z M167.5,331.1 c-10.3-8.8-16.7-22-16.7-36.6c0-26.9,21.8-48.7,48.7-48.7s48.7,21.8,48.7,48.7c0,14.6-6.4,27.8-16.7,36.6l10.3,38.3l-42.3-11.3 l-42.3,11.3L167.5,331.1z M334.4,190.8c-11.7,0-21.2-9.5-21.2-21.2s9.5-21.2,21.2-21.2s21.2,9.5,21.2,21.2S346.1,190.8,334.4,190.8z"/></svg>
                 </a>
@@ -341,88 +290,76 @@
 
         <!-- NAVIGATION MENU -->
         <nav class="main-menu">
-            <a href="index.html">Manifesto</a>
+            <a href="#" id="home-link" class="active">Manifesto</a>
+            <a href="#" id="txt-mode-link">.TXT</a>
             <a href="https://stop6g.github.io/6G-SCOUT" target="_blank">6G-EU</a>
             <a href="https://stop6g.github.io/6G-Q/" target="_blank">6G-Q</a>
             <a href="https://stop6g.github.io/6G-arXiv/" target="_blank">6G-arXiv</a>
         </nav>
 
-        <section class="manifesto">
-            <h2>Manifesto</h2>
-            
-            <div class="point">
-                <span>01. Human Sovereignty</span>
-                <p>Leading the frontline against the deployment of autonomous AI robot armies and the weaponization of embodied AI.</p>
-            </div>
+        <!-- HOME VIEW (Manifesto ONLY) -->
+        <div id="home-view">
+            <section class="manifesto">
+                <h2>Manifesto</h2>
+                
+                <div class="point">
+                    <span>01. Human Sovereignty</span>
+                    <p>Leading the frontline against the deployment of autonomous AI robot armies and the weaponization of embodied AI.</p>
+                </div>
+                <div class="point">
+                    <span>02. Cognitive Liberty</span>
+                    <p>Protecting the human mind from algorithmic manipulation and the intrusive synchronization of neural interfaces.</p>
+                </div>
+                <div class="point">
+                    <span>03. The Right to Disconnect</span>
+                    <p>Demanding the legal and physical right to exist outside the digital grid. Analogue life is a fundamental human right.</p>
+                </div>
+                <div class="point">
+                    <span>04. Anti-Total Surveillance</span>
+                    <p>Opposing the "Internet of Bodies" (IoB) and the real-time biometric tracking of human biology through 6G-connected sensors.</p>
+                </div>
+                <div class="point">
+                    <span>05. Decentralized Existence</span>
+                    <p>Promoting local, independent and resilient communication infrastructures beyond the control of centralized technocratic entities.</p>
+                </div>
+                <div class="point">
+                    <span>06. Biological Integrity</span>
+                    <p>Preserving human health and natural ecosystems against unproven high-frequency radiation and magnetosphere saturation.</p>
+                </div>
+                <div class="point">
+                    <span>07. Precautionary Principle</span>
+                    <p>Demanding independent scientific proof of safety before any global deployment of sub-terahertz frequencies.</p>
+                </div>
+                <div class="point">
+                    <span>08. Environmental Conscience</span>
+                    <p>Opposing the massive energy consumption of AI-driven networks and the destructive mining of rare minerals.</p>
+                </div>
+                <div class="point">
+                    <span>09. Ethical Autonomy</span>
+                    <p>Refusing the outsourcing of human judgment to unaccountable black-box AI models that lack ethical empathy.</p>
+                </div>
+                <div class="point">
+                    <span>10. Evolutionary Preservation</span>
+                    <p>Defending biological evolution against the forced transhumanist agenda and synthetic biology integration.</p>
+                </div>
+            </section>
+        </div>
 
-            <div class="point">
-                <span>02. Cognitive Liberty</span>
-                <p>Protecting the human mind from algorithmic manipulation and the intrusive synchronization of neural interfaces.</p>
-            </div>
+        <!-- TXT VIEW -->
+        <div id="txt-view"></div>
 
-            <div class="point">
-                <span>03. The Right to Disconnect</span>
-                <p>Demanding the legal and physical right to exist outside the digital grid. Analogue life is a fundamental human right.</p>
-            </div>
-
-            <div class="point">
-                <span>04. Anti-Total Surveillance</span>
-                <p>Opposing the "Internet of Bodies" (IoB) and the real-time biometric tracking of human biology through 6G-connected sensors.</p>
-            </div>
-
-            <div class="point">
-                <span>05. Decentralized Existence</span>
-                <p>Promoting local, independent and resilient communication infrastructures beyond the control of centralized technocratic entities.</p>
-            </div>
-
-            <div class="point">
-                <span>06. Biological Integrity</span>
-                <p>Preserving human health and natural ecosystems against unproven high-frequency radiation and magnetosphere saturation.</p>
-            </div>
-
-            <div class="point">
-                <span>07. Precautionary Principle</span>
-                <p>Demanding independent scientific proof of safety before any global deployment of sub-terahertz frequencies.</p>
-            </div>
-
-            <div class="point">
-                <span>08. Environmental Conscience</span>
-                <p>Opposing the massive energy consumption of AI-driven networks and the destructive mining of rare minerals.</p>
-            </div>
-
-            <div class="point">
-                <span>09. Ethical Autonomy</span>
-                <p>Refusing the outsourcing of human judgment to unaccountable black-box AI models that lack ethical empathy.</p>
-            </div>
-
-            <div class="point">
-                <span>10. Evolutionary Preservation</span>
-                <p>Defending biological evolution against the forced transhumanist agenda and synthetic biology integration.</p>
-            </div>
-        </section>
-
+        <!-- COUNTDOWN (ALWAYS VISIBLE NOW) -->
         <section class="countdown-section">
             <h2>Estimated 6G Global Deployment</h2>
             <div id="countdown">
-                <div class="time-unit">
-                    <span id="days">00</span>
-                    <label>Days</label>
-                </div>
-                <div class="time-unit">
-                    <span id="hours">00</span>
-                    <label>Hours</label>
-                </div>
-                <div class="time-unit">
-                    <span id="minutes">00</span>
-                    <label>Minutes</label>
-                </div>
-                <div class="time-unit">
-                    <span id="seconds">00</span>
-                    <label>Seconds</label>
-                </div>
+                <div class="time-unit"><span id="days">00</span><label>Days</label></div>
+                <div class="time-unit"><span id="hours">00</span><label>Hours</label></div>
+                <div class="time-unit"><span id="minutes">00</span><label>Minutes</label></div>
+                <div class="time-unit"><span id="seconds">00</span><label>Seconds</label></div>
             </div>
             <p class="enjoy-fight">ENJOY THE FIGHT</p>
         </section>
+
     </div>
 
     <footer>
@@ -430,12 +367,11 @@
     </footer>
 
     <script>
-        // Theme Toggle Script
+        // --- THEME LOGIC ---
         const btn = document.getElementById("theme-toggle");
         const icon = btn.querySelector("i");
         const currentTheme = localStorage.getItem("theme");
 
-        // Función para actualizar el icono
         function updateIcon(theme) {
             if (theme === "dark") {
                 icon.classList.remove("fa-moon");
@@ -464,7 +400,7 @@
             }
         });
 
-        // Countdown Script
+        // --- COUNTDOWN LOGIC ---
         function updateCountdown() {
             const launchDate = new Date("January 1, 2030 00:00:00").getTime();
             const now = new Date().getTime();
@@ -480,9 +416,356 @@
             document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
         }
-
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // --- TEXT ENGINE (FULL LOGIC REPLICA) ---
+        const CONFIG = {
+            owner: 'stop6G',
+            repo: '6G-TEXTS',
+            path: '',
+            branch: 'main'
+        };
+
+        const app = {
+            container: document.getElementById('txt-view'),
+            postsCache: [], 
+            contentCache: {}, 
+            viewMode: 'normal', 
+            speedInterval: null,
+            speedWords: [],
+            speedIndex: 0,
+            initialized: false,
+            currentPostPath: null,
+
+            async init() {
+                if (this.initialized) return;
+                this.container.innerHTML = '<div class="text-gray-500 font-mono text-sm animate-pulse">Connecting to Archive...</div>';
+                await this.loadPostsIndex();
+                this.renderHome();
+                this.initialized = true;
+            },
+
+            scrollToId(id) {
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            },
+
+            // BASIC MARKDOWN PARSING (Before NLP)
+            parseMarkdown(text) {
+                // Headers
+                text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                text = text.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+                // Blockquotes
+                text = text.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+                // Bold & Italic (Crucial Fix)
+                text = text.replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>');
+                text = text.replace(/\*(.*?)\*/gim, '<i>$1</i>');
+                // Links
+                text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="underline decoration-dotted" style="color:var(--text-color)">$1</a>');
+                return text;
+            },
+
+            async loadPostsIndex() {
+                try {
+                    const response = await fetch(`https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents`);
+                    if (!response.ok) throw new Error("API Error");
+                    const data = await response.json();
+                    this.postsCache = data.filter(file => file.name.endsWith('.txt'));
+                    
+                    // Metadata fetch
+                    await Promise.all(this.postsCache.map(async (file) => {
+                        const rawUrl = file.download_url;
+                        const res = await fetch(rawUrl);
+                        const text = await res.text();
+                        file.title = text.split('\n')[0].replace(/^#+\s*/, '').replace(/\*\*/g, '').trim() || file.name;
+                        
+                        try {
+                            const commitUrl = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/commits?path=${file.path}&per_page=1`;
+                            const commitRes = await fetch(commitUrl);
+                            if(commitRes.ok) {
+                                const commits = await commitRes.json();
+                                if(commits.length > 0) {
+                                    file.rev = commits[0].sha.substring(0, 7);
+                                    file.date = new Date(commits[0].commit.author.date).toLocaleDateString();
+                                }
+                            }
+                        } catch(e) {}
+                        if(!file.rev) file.rev = "----";
+                        if(!file.date) file.date = "ARCHIVED";
+                    }));
+                } catch (e) {
+                    this.container.innerHTML = `<div class="text-red-500 font-mono">Error: Could not connect to text archive.</div>`;
+                }
+            },
+
+            async fetchPostData(path) {
+                if (this.contentCache[path]) return this.contentCache[path];
+                const res = await fetch(`https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/${path}`);
+                const content = await res.text();
+                const lines = content.split('\n');
+                const title = lines[0].replace(/^#+\s*/, '').replace(/\*\*/g, '').trim();
+                const body = lines.slice(1).join('\n').trim();
+                
+                let revision = { sha: '----', date: '----' };
+                const cachedPost = this.postsCache.find(p => p.path === path);
+                if(cachedPost) revision = { sha: cachedPost.rev, date: cachedPost.date };
+
+                const data = { title, body, revision, rawPath: path };
+                this.contentCache[path] = data;
+                return data;
+            },
+
+            renderHome() {
+                this.stopSpeedReader();
+                this.currentPostPath = null;
+                if (this.postsCache.length === 0) return;
+
+                const postsHtml = this.postsCache.map((file, index) => {
+                    const indexStr = String(index + 1).padStart(3, '0');
+                    return `
+                    <article class="mb-6 cursor-pointer border-b border-white/10 pb-4" onclick="app.renderPost('${file.path}')">
+                        <div class="flex justify-between text-xs font-mono text-gray-500 mb-1">
+                            <span>.txt</span>
+                            <span class="opacity-50">REV: ${file.rev}</span>
+                        </div>
+                        <h2 class="text-xl font-bold hover:opacity-70 transition-opacity capitalize mb-1" style="color: var(--text-color);">
+                            ${indexStr} - ${file.title}
+                        </h2>
+                    </article>
+                `}).join('');
+                this.container.innerHTML = `<div class="fade-in mt-8">${postsHtml}</div>`;
+            },
+
+            async renderPost(path) {
+                this.stopSpeedReader();
+                this.currentPostPath = path;
+                this.container.innerHTML = `<div class="text-gray-500 font-mono animate-pulse mt-12">Fetching Data...</div>`;
+                
+                const post = await this.fetchPostData(path);
+                const bodyLinesRaw = post.body.split('\n');
+                
+                const bodyLines = [];
+                const footnotes = {};
+                let currentFootnoteId = null;
+
+                bodyLinesRaw.forEach(line => {
+                    const match = line.match(/^\[(\d+)\]\s+(.*)$/);
+                    if (match) {
+                        currentFootnoteId = match[1];
+                        footnotes[currentFootnoteId] = match[2];
+                    } else if (currentFootnoteId && line.trim().length > 0) {
+                        footnotes[currentFootnoteId] += " " + line.trim();
+                    } else if (currentFootnoteId && line.trim().length === 0) {
+                        currentFootnoteId = null;
+                    } else {
+                        bodyLines.push(line);
+                    }
+                });
+
+                const controls = `
+                    <div class="flex justify-end gap-1 mb-4">
+                        <button onclick="app.toggleView('normal')" class="view-btn ${this.viewMode === 'normal' ? 'active' : ''}" title="Normal">N</button>
+                        <button onclick="app.toggleView('clown')" class="view-btn ${this.viewMode === 'clown' ? 'active' : ''}" title="Clown">C</button>
+                        <button onclick="app.toggleView('speed')" class="view-btn ${this.viewMode === 'speed' ? 'active' : ''}" title="Speed">S</button>
+                        <button onclick="app.toggleView('heatmap')" class="view-btn ${this.viewMode === 'heatmap' ? 'active' : ''}" title="Heatmap">H</button>
+                    </div>`;
+
+                if (this.viewMode === 'speed') {
+                    const cleanText = bodyLines.join(' ').replace(/\[\d+\]/g, '').replace(/[^\w\s\.\,\!\?]/g, ''); 
+                    this.speedWords = cleanText.split(/\s+/).filter(w => w.length > 0);
+                    this.speedIndex = 0;
+                    
+                    this.container.innerHTML = `
+                        <div class="fade-in">
+                            <div class="flex justify-between items-center mb-6">
+                                <button onclick="app.renderHome()" class="text-xs font-mono hover:underline">← INDEX</button>
+                                ${controls}
+                            </div>
+                            <h1 class="text-2xl font-bold mb-6">${post.title}</h1>
+                            <div class="h-64 flex flex-col items-center justify-center border border-white/20 rounded">
+                                <div id="speed-display" class="text-4xl font-bold" style="color:var(--text-color)">READY</div>
+                                <div class="mt-4 flex gap-2">
+                                    <button onclick="app.runSpeedReader()" class="view-btn">PLAY</button>
+                                    <button onclick="app.stopSpeedReader()" class="view-btn">PAUSE</button>
+                                </div>
+                            </div>
+                        </div>`;
+                    return;
+                }
+
+                // --- ADVANCED RENDERING LOGIC ---
+                let processedBody = "";
+                
+                if (this.viewMode === 'clown') {
+                    // Full NLP Logic restoration
+                    processedBody = bodyLines.map(line => {
+                        if (!line.trim()) return "";
+                        const cleanLine = line.replace(/\*\*/g, '').replace(/\*/g, '');
+                        const protectedLine = cleanLine.replace(/(\[\d+\])/g, "___PROTECTED___");
+                        
+                        let doc = nlp(protectedLine);
+                        let matches = [
+                            ...Array.from(protectedLine.matchAll(/\b([1-6])G\b/g)).map(m => ({ offset: { start: m.index, length: m[0].length }, type: 'gen', level: m[1], priority: 6 })),
+                            ...doc.numbers().json({offset:true}).map(m=>({...m, type:'num', priority:5})),
+                            ...doc.acronyms().json({offset:true}).map(m=>({...m, type:'acr', priority:3})),
+                            ...doc.match('#Adjective').not('#Acronym').json({offset:true}).map(m=>({...m, type:'adj', priority:2})),
+                            ...doc.match('#Verb').not('#Acronym').json({offset:true}).map(m=>({...m, type:'verb', priority:1.5})),
+                            ...doc.match('(the|a|an)').not('#Acronym').json({offset:true}).map(m=>({...m, type:'det', priority:0.5})), 
+                            ...doc.match('#Noun').not('#Acronym').not('#Adjective').not('#Pronoun').json({offset:true}).map(m=>({...m, type:'noun', priority:1}))
+                        ].filter(m => m && m.offset).sort((a,b) => b.priority - a.priority);
+
+                        let chars = protectedLine.split('');
+                        let mask = new Array(chars.length).fill(false);
+
+                        matches.forEach(m => {
+                            let start = m.offset.start; 
+                            let len = m.offset.length;
+                            for(let i=start; i<start+len; i++) if(mask[i]) return;
+                            
+                            let text = protectedLine.substring(start, start+len);
+                            let cls = "";
+                            
+                            if (m.type === 'det') {
+                                const rot = Math.random() * 30 - 15;
+                                const y = Math.random() * 10 - 5;
+                                chars[start] = `<span class="chaos-word" style="transform: rotate(${rot}deg) translateY(${y}px)">${text}</span>`;
+                            } else {
+                                if (m.type === 'gen') {
+                                    cls = m.level === '6' ? 'blink-6g font-metal text-2xl' : `blink-${m.level}g`;
+                                } else if (m.type === 'num') {
+                                    cls = 'font-black text-xl'; // Removed white, relies on theme
+                                } else if (m.type === 'acr') {
+                                    cls = 'font-bold tracking-widest';
+                                } else if (m.type === 'adj') {
+                                    // Adjectives get background highlight
+                                    chars[start] = `<span style="background:var(--text-color); color:var(--bg-color); padding:0 2px; border-radius:2px;">${text}</span>`;
+                                    for(let i=start+1; i<start+len; i++) chars[i] = "";
+                                    for(let i=start; i<start+len; i++) mask[i] = true;
+                                    return;
+                                } else if (m.type === 'verb') {
+                                    // Colorful verbs
+                                    const colors = ['text-red-400', 'text-orange-400', 'text-yellow-300', 'text-lime-400', 'text-emerald-400', 'text-cyan-400', 'text-blue-400', 'text-violet-400', 'text-fuchsia-400', 'text-rose-400'];
+                                    text = text.split('').map(c => {
+                                        const color = colors[Math.floor(Math.random() * colors.length)];
+                                        return `<span class="${color}">${c}</span>`;
+                                    }).join('');
+                                    chars[start] = text;
+                                    for(let i=start+1; i<start+len; i++) chars[i] = "";
+                                    for(let i=start; i<start+len; i++) mask[i] = true;
+                                    return;
+                                } else {
+                                    cls = 'font-semibold opacity-90';
+                                }
+                                chars[start] = `<span class="${cls}">${text}</span>`;
+                            }
+                            for(let i=start+1; i<start+len; i++) chars[i] = "";
+                            for(let i=start; i<start+len; i++) mask[i] = true;
+                        });
+                        
+                        return chars.join('').replace(/___PROTECTED___/g, '[1]');
+                    }).join('\n');
+
+                } else if (this.viewMode === 'heatmap') {
+                    processedBody = bodyLines.map(line => {
+                        // Strip markdown for heatmap calculation purity
+                        const cleanLine = line.replace(/\*\*/g, '');
+                        return cleanLine.split(' ').map(w => {
+                            const cleanLen = w.replace(/[^a-zA-Z]/g, '').length;
+                            let cls = "";
+                            if (cleanLen <= 3) cls = "heat-1";
+                            else if (cleanLen <= 5) cls = "heat-2";
+                            else if (cleanLen <= 7) cls = "heat-3";
+                            else if (cleanLen <= 9) cls = "heat-4";
+                            else cls = "heat-5";
+                            return `<span class="${cls}">${w}</span>`;
+                        }).join(' ');
+                    }).join('\n');
+
+                } else {
+                    // Normal Mode: apply Markdown parsing
+                    processedBody = bodyLines.map(line => {
+                        if (!line.trim()) return "";
+                        return this.parseMarkdown(line);
+                    }).join('\n');
+                }
+
+                // Final HTML Assembly
+                // Process paragraphs only if not headers (Simple block logic)
+                const finalHTML = processedBody.split('\n').map(line => {
+                    if(line.startsWith('<h') || line.startsWith('<blockquote')) return line;
+                    return `<p>${line}</p>`;
+                }).join('');
+
+                // Replace Footnotes references in body
+                const contentWithRefs = finalHTML.replace(/\[(\d+)\]/g, (match, id) => {
+                    if (footnotes[id]) {
+                        return `<sup id="ref-${id}"><button onclick="app.scrollToId('fn-${id}')">[${id}]</button></sup>`;
+                    }
+                    return match;
+                });
+
+                // Build Footnotes Section
+                let footnotesHtml = '';
+                const footnoteIds = Object.keys(footnotes).sort((a,b) => a - b);
+                if (footnoteIds.length > 0) {
+                    footnotesHtml = `<div class="mt-12 pt-8 border-t border-white/10"><ul class="space-y-2 text-sm text-gray-500">${footnoteIds.map(id => `<li id="fn-${id}"><button onclick="app.scrollToId('ref-${id}')" class="text-pink-500 mr-2">[${id}]</button> ${this.parseMarkdown(footnotes[id])}</li>`).join('')}</ul></div>`;
+                }
+
+                this.container.innerHTML = `
+                    <div class="fade-in">
+                        <div class="flex justify-between items-start mb-8">
+                            <button onclick="app.renderHome()" class="text-xs font-mono hover:underline mt-2">← INDEX</button>
+                            ${controls}
+                        </div>
+                        <h1 class="text-3xl font-bold mb-2">${post.title}</h1>
+                        <div class="text-xs font-mono text-gray-500 mb-8">REV: ${post.revision.sha} | ${post.revision.date}</div>
+                        <article class="prose max-w-none text-gray-400">
+                            ${contentWithRefs}
+                        </article>
+                        ${footnotesHtml}
+                    </div>`;
+            },
+
+            toggleView(mode) {
+                this.viewMode = mode;
+                if(this.currentPostPath) this.renderPost(this.currentPostPath);
+            },
+
+            runSpeedReader() {
+                if (this.speedInterval) return;
+                const display = document.getElementById('speed-display');
+                this.speedInterval = setInterval(() => {
+                    if (this.speedIndex >= this.speedWords.length) { this.stopSpeedReader(); display.innerText = "DONE"; return; }
+                    display.innerText = this.speedWords[this.speedIndex++];
+                }, 250);
+            },
+            stopSpeedReader() { clearInterval(this.speedInterval); this.speedInterval = null; }
+        };
+
+        // --- 4. VIEW SWITCHING LOGIC ---
+        const homeLink = document.getElementById("home-link");
+        const txtLink = document.getElementById("txt-mode-link");
+        const homeView = document.getElementById("home-view");
+        const txtView = document.getElementById("txt-view");
+
+        homeLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            homeView.style.display = "block";
+            txtView.style.display = "none";
+            homeLink.classList.add("active");
+            txtLink.classList.remove("active");
+        });
+
+        txtLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            homeView.style.display = "none";
+            txtView.style.display = "block";
+            txtLink.classList.add("active");
+            homeLink.classList.remove("active");
+            app.init();
+        });
     </script>
 </body>
 </html>
