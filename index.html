@@ -292,21 +292,21 @@ The battle started today</title>
             </div>
             
             <div class="contact-icon-only">
-            <a href="mailto:STOP6G@proton.me" title="STOP6G@proton.me">
-                <i class="fas fa-envelope"></i>
-            </a>
+                <a href="mailto:STOP6G@proton.me" title="STOP6G@proton.me">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
         </div>
-    </div>
 
-    <!-- NAVIGATION MENU -->
-    <nav class="main-menu">
-        <a href="#" id="home-link" class="active">Manifesto</a>
-        <a href="#" id="txt-mode-link">TXT</a>
-        <a href="#" id="research-link">Research</a>
-    </nav>
+        <!-- NAVIGATION MENU -->
+        <nav class="main-menu">
+            <a href="#manifesto" id="home-link" class="active">Manifesto</a>
+            <a href="#txt" id="txt-mode-link">TXT</a>
+            <a href="#research" id="research-link">Research</a>
+        </nav>
 
-    <!-- HOME VIEW (Manifesto ONLY) -->
-    <div id="home-view">
+        <!-- HOME VIEW (Manifesto ONLY) -->
+        <div id="home-view">
             <section class="manifesto">
                 <h2>Manifesto</h2>
                 
@@ -531,7 +531,14 @@ The battle started today</title>
                 if (this.initialized) return;
                 this.container.innerHTML = '<div class="text-gray-500 font-mono text-sm animate-pulse">Connecting to Archive...</div>';
                 await this.loadPostsIndex();
-                this.renderHome();
+                
+                // On initial load of app, check if we need to load a specific post
+                const hash = window.location.hash.replace(/^#/, '');
+                if (hash !== 'txt' && hash.endsWith('.txt')) {
+                    this.renderPost(hash);
+                } else {
+                    this.renderHome();
+                }
                 this.initialized = true;
             },
 
@@ -609,12 +616,15 @@ The battle started today</title>
             renderHome() {
                 this.stopSpeedReader();
                 this.currentPostPath = null;
+                // If we go back to text home, set hash to #txt
+                if (window.location.hash !== '#txt') window.location.hash = 'txt';
+                
                 if (this.postsCache.length === 0) return;
 
                 const postsHtml = this.postsCache.map((file, index) => {
                     const indexStr = String(index + 1).padStart(3, '0');
                     return `
-                    <article class="mb-6 cursor-pointer border-b border-white/10 pb-4" onclick="app.renderPost('${file.path}')">
+                    <article class="mb-6 cursor-pointer border-b border-white/10 pb-4" onclick="window.location.hash = '${file.path}'">
                         <div class="flex justify-between text-xs font-mono text-gray-500 mb-1">
                             <span>.txt</span>
                             <span class="opacity-50">REV: ${file.rev}</span>
@@ -833,41 +843,69 @@ The battle started today</title>
             stopSpeedReader() { clearInterval(this.speedInterval); this.speedInterval = null; }
         };
 
-        // --- 6. VIEW SWITCHING LOGIC ---
-        homeLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            homeView.style.display = "block";
-            txtView.style.display = "none";
-            researchView.style.display = "none";
-            homeLink.classList.add("active");
-            txtLink.classList.remove("active");
-            researchLink.classList.remove("active");
-        });
-
-        txtLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            homeView.style.display = "none";
-            txtView.style.display = "block";
-            researchView.style.display = "none";
-            txtLink.classList.add("active");
-            homeLink.classList.remove("active");
-            researchLink.classList.remove("active");
-            app.init();
-        });
-
-        researchLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            homeView.style.display = "none";
-            txtView.style.display = "none";
-            researchView.style.display = "block";
-            researchLink.classList.add("active");
-            homeLink.classList.remove("active");
-            txtLink.classList.remove("active");
+        // --- 6. GLOBAL ROUTER (Hash Handling) ---
+        function handleRoute() {
+            const hash = window.location.hash;
             
-            if (!researchLoaded) {
-                loadResearch();
+            // Determine active section based on hash
+            let section = 'home';
+            if (hash === '#research') {
+                section = 'research';
+            } else if (hash === '#txt' || hash.endsWith('.txt')) {
+                section = 'txt';
             }
-        });
+
+            // Update UI State
+            if (section === 'home') {
+                homeView.style.display = "block";
+                txtView.style.display = "none";
+                researchView.style.display = "none";
+                
+                homeLink.classList.add("active");
+                txtLink.classList.remove("active");
+                researchLink.classList.remove("active");
+            } 
+            else if (section === 'research') {
+                homeView.style.display = "none";
+                txtView.style.display = "none";
+                researchView.style.display = "block";
+                
+                researchLink.classList.add("active");
+                homeLink.classList.remove("active");
+                txtLink.classList.remove("active");
+                
+                if (!researchLoaded) loadResearch();
+            } 
+            else if (section === 'txt') {
+                homeView.style.display = "none";
+                txtView.style.display = "block";
+                researchView.style.display = "none";
+                
+                txtLink.classList.add("active");
+                homeLink.classList.remove("active");
+                researchLink.classList.remove("active");
+                
+                if (!app.initialized) {
+                    app.init();
+                } else {
+                    // Check if we need to route internal app based on hash
+                    const path = hash.replace(/^#/, '');
+                    if (path !== 'txt' && path.endsWith('.txt')) {
+                        // Avoid infinite loops by checking current path
+                        if (app.currentPostPath !== path) {
+                            app.renderPost(path);
+                        }
+                    } else if (path === 'txt') {
+                        app.renderHome();
+                    }
+                }
+            }
+        }
+
+        // Listen for hash changes and load events
+        window.addEventListener('hashchange', handleRoute);
+        window.addEventListener('load', handleRoute);
+
     </script>
 </body>
 </html>
