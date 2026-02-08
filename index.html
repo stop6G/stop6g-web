@@ -173,6 +173,7 @@ The battle started today</title>
         #txt-view .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1.5em; }
         #txt-view .prose blockquote { border-left: 2px solid var(--border-color); padding-left: 1rem; margin-left: 0; color: var(--point-text); font-style: italic; }
         #txt-view b, #txt-view strong { font-weight: 800; color: var(--text-color); } 
+        #txt-view i, #txt-view em { font-style: italic; }
         
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -230,13 +231,13 @@ The battle started today</title>
             transition: all 0.2s;
             opacity: 0.4;
             line-height: 1;
-            margin-left: 0; /* Closer together */
+            margin-left: 0; 
         }
         .view-btn:hover { opacity: 1; }
         .view-btn.active { 
             opacity: 1; 
-            text-decoration: none; /* Removed underline */
-            border: 1px solid var(--border-color); /* Subtle box border for active */
+            text-decoration: none; 
+            border: 1px solid var(--border-color);
         }
 
         #research-view {
@@ -549,13 +550,17 @@ The battle started today</title>
 
             // BASIC MARKDOWN PARSING (Before NLP)
             parseMarkdown(text) {
-                // Headers
+                // Headers - Handle BOLD inside headers
                 text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
                 text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
                 text = text.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+                
+                // Remove Markdown bold markers inside headers to fix display
+                text = text.replace(/<h([1-6])>\s*\*\*(.*?)\*\*\s*<\/h\1>/gim, '<h$1>$2</h$1>');
+
                 // Blockquotes
                 text = text.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
-                // Bold & Italic (Crucial Fix)
+                // Bold & Italic (Improved Regex)
                 text = text.replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>');
                 text = text.replace(/\*(.*?)\*/gim, '<i>$1</i>');
                 // Links
@@ -649,8 +654,11 @@ The battle started today</title>
                 const footnotes = {};
                 let currentFootnoteId = null;
 
+                // IMPROVED FOOTNOTE REGEX: Handle bolded/non-bolded, dashed/non-dashed, and colon variations
+                // Example match: **[36] - CrowdStrike:** or [36]
                 bodyLinesRaw.forEach(line => {
-                    const match = line.match(/^\[(\d+)\]\s+(.*)$/);
+                    const match = line.match(/^(?:\*\*|)?\[(\d+)\](?:\*\*|)?(?:\]|:)?(?:\s*-\s*)?(.*)$/);
+                    
                     if (match) {
                         currentFootnoteId = match[1];
                         footnotes[currentFootnoteId] = match[2];
